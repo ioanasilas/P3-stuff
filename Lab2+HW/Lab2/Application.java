@@ -17,8 +17,8 @@ public class Application
 
   void run()
   {
-    System.out.println("Application started!");
-    playGame(id, id2);
+    od.writeMessage("Application started!\n");
+    playGame(id, id2, 5);
     // od.writeMessage("Application started!\nToday's lucky nos are: ");
     // // System.out.println("Application started!\n");
     // // System.out.println("Today's lucky nos are: ");
@@ -27,51 +27,53 @@ public class Application
     // System.out.println(id.nextInt());
   }
 
-  int playGame(InputDevice h, InputDevice s)
+  int playGame(InputDevice h, InputDevice s, int roundsToWin)
   {
     int noFromH = 0, noFromS = 0;
     int points4H = 0, points4S = 0;
 
-    while (points4H < 5 && points4S < 5)
+    while (points4H < roundsToWin && points4S < roundsToWin)
     {
       // better perform and no null possibility we're good
       noFromH = h.nextInt();
       noFromS = s.nextInt();
 
       // print stuff 2 see
-      System.out.println("H is " + noFromH);
-      System.out.println("S is " + noFromS);
+      od.writeMessage("H is " + noFromH);
+      od.writeMessage("S is " + noFromS);
 
       if (noFromH > noFromS && noFromH % noFromS == 0 && noFromS >= 10)
       {
         points4S++;
-        System.out.println("S won this round!\n");
+        od.writeMessage("S won this round!\nS total points: " + points4S + "\n");
       }
       else if (noFromH > noFromS)
       {
         points4H++;
-        System.out.println("H won this round!\n");
+        od.writeMessage("H won this round!\nH total points: " + points4H + "\n");
       }
       else if (noFromS > noFromH)
       {
         points4S++;
-        System.out.println("S won this round!\n");
+        od.writeMessage("S won this round!\nS total points: " + points4S + "\n");
       }
       else
       {
         points4S++;
         points4H++;
-        System.out.println(("S and H chose the same number!\n"));
+        od.writeMessage("S and H chose the same number!\n");
+        od.writeMessage("S total points: " + points4S);
+        od.writeMessage("H total points: " + points4H + "\n");
       }
     }
-    if (points4S == 5)
+    if (points4S == roundsToWin)
     {
-      System.out.println("S won the game!");
+      od.writeMessage("S won the game!\n");
       return noFromS;
     }
     else
     {
-      System.out.println("H won the game!");
+      od.writeMessage("H won the game!\n");
       return noFromH;
     }
   } 
@@ -162,21 +164,34 @@ public class Application
     }
 
     //print og array
-    System.out.println("Original array: ");
+    od.writeMessage("Original array: ");
     for (int num : array)
     {
-      System.out.println(num + " ");
+      System.out.print(num + " ");
     }
     System.out.println();
 
     sortNumbers(array, 0, (N-1));
-    System.out.println("Sorted array: ");
+    od.writeMessage("Sorted array: ");
     
     // print sorted array
     for (int num : array)
     {
-      System.out.println(num + " ");
+      System.out.print(num + " ");
     }
     System.out.println();
+    System.out.println();
+  }
+
+  int[] wordSizeHistogram(String sentence)
+  {
+    String[] words = sentence.split(" ");
+    int[] wordFrequency = new int[words.length];
+
+    for (String word : words)
+    {
+      wordFrequency[word.length()]++;
+    }
+    return wordFrequency;
   }
 }

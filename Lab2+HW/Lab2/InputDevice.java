@@ -26,5 +26,10 @@ public class InputDevice
     return numbers;
   }
 
+  String getLine()
+  {
+    return "I would love to have words that are three letters in this sentence but I cannot seem to hey nevermind it happened.";
+  }
+
 
 }
