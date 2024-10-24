@@ -1,42 +1,85 @@
-public class Main {
+import java.time.LocalDate;
+
+public class Main
+{
     public static void main(String[] args)
     {
-        A myA = new A("WhateverA");
+        // tasks
+        Task myTask2 = new Task("Programming 3", "Do Java HW (Meta)", 2, LocalDate.of(2024, 10, 25));
+        Task myTask3 = new Task("Operating Systems", "Cry a river", 1, LocalDate.of(2024, 10, 26));
+        Task myTask4 = new Task("Operating Systems", "Stop crying, finish dir traversal program", 2, LocalDate.of(2024, 10, 27));
+        Task myTask5 = new Task("Combinatorics", "Do Lecture 4 HW", 2, LocalDate.of(2024, 10, 29));
+        Task myTask6 = new Task("Combinatorics", "Forget what a permutation is", 3, LocalDate.of(2024, 10, 28));
+        Task myTask7 = new Task("Go Gym", "Stop rotting in bed", 2, LocalDate.of(2024, 10, 24));
 
-        C[] myCArray = new C[3];
-        myCArray[0] = new C("FirstC");
-        myCArray[1] = new C("SecondC");
-        myCArray[2] = new C("ThirdC");
+        // tasks array
+        Task[] tasks = new Task[] {myTask4, myTask2, myTask3};
 
-        B myB = new B(myA, myCArray);
+        // task categories
+        TaskCategory taskCategory1 = new TaskCategory("Uni Stuff", 10);
+        TaskCategory taskCategory2 = new TaskCategory("Health", 10);
+        TaskCategory taskCategory3 = new TaskCategory("Nothingness", 10);
 
+        // taskcategory array
+        TaskCategory[] taskCategories = new TaskCategory[] {taskCategory1, taskCategory2, taskCategory3};
+
+        // task manager
+        TaskManager taskManager = new TaskManager(myTask2, taskCategories);
+
+        // adding tasks manually to see both add and remove work in the same run
+        taskManager.addTask("Programming 3", "Do Java HW (Meta)", 2, LocalDate.of(2024, 10, 25), "Uni Stuff");
+        taskManager.addTask("Go Gym", "Stop rotting in bed", 2, LocalDate.of(2024, 10, 24), "Health");
+
+        // do cmd thingy
         if (args.length > 0)
         {
-            switch (args[0])
+            String command = args[0];
+            switch(command)
             {
-                case "describeA" -> myB.describeA();
-                case "countC" ->
+                case "addTask":
                 {
-                    int count = myB.countCObjects();
-                    System.out.println("No of C objects: " + count);
+                    if(args.length == 6)
+                    {
+                        String taskTitle = args[1];
+                        String taskDescription = args[2];
+                        int taskPriority = Integer.parseInt(args[3]);
+                        LocalDate taskDueDate = LocalDate.parse(args[4]);
+                        String taskCategory = args[5];
+
+                        taskManager.addTask(taskTitle, taskDescription, taskPriority, taskDueDate, taskCategory);
+                        System.out.println("Task added: " + taskTitle + "\n");
+                    }
+                    else
+                    {
+                        System.out.println("Invalid arguments. Usage: addTask <task title> <task description> <task priority> <task due date> <task category>");
+                    }
+                    break;
                 }
-                case "nameA" ->
+                case "removeTask":
                 {
-                    String name = myA.toString();
-                    System.out.println("Name of A: " + name);
-                }
-                default ->
-                {
-                    System.out.println("Unknown command: " + args[0]);
-                    System.out.println("Valid commands: describeA, countC, nameA");
+                    if (args.length == 2)
+                    {
+                        String taskTitle = args[1];
+                        taskManager.removeTask(taskTitle);
+                    }
+                    else
+                    {
+                        System.out.println("Invalid arguments. Usage: removeTask <task title>");
+                    }
+                    break;
                 }
             }
         }
-        else
+        System.out.println("Existing tasks in taskCategories:");
+        for (TaskCategory category : taskCategories)
         {
-            System.out.println("No commands were specified");
-            System.out.println("Valid commands: describeA, countC, nameA");
+            for (Task task : category.getTasks())
+            {
+                if (task != null)
+                {
+                    System.out.println(task);
+                }
+            }
         }
-
     }
 }
