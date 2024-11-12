@@ -23,16 +23,15 @@ public class Main {
         TaskCategory[] taskCategories = new TaskCategory[]{taskCategory1, taskCategory2, taskCategory3};
 
         // task manager
-        // task manager
         TaskManager taskManager = new TaskManager(null, taskCategories);
 
         // adding tasks manually to see both add and remove work in the same run
         taskManager.addTask("Programming 3", "Do Java HW (Meta)", 2, LocalDate.of(2024, 10, 25), "Uni Stuff");
         taskManager.addTask("Go Gym", "Stop rotting in bed", 2, LocalDate.of(2024, 10, 24), "Health");
-        taskManager.addTask("Combinatorics", "Do Lecture 4 HW", 2, LocalDate.of(2024, 10, 29), "Uni Stuff");
-        taskManager.addTask("Operating Systems", "Stop crying, finish dir traversal program", 2, LocalDate.of(2024, 10, 27), "Uni Stuff");
-        taskManager.addTask("Operating Systems", "Cry a river", 1, LocalDate.of(2024, 10, 26), "Uni Stuff");
-        taskManager.addTask("Combinatorics", "Forget what a permutation is", 3, LocalDate.of(2024, 10, 28), "Uni Stuff");
+        taskManager.addTask("Combinatorics - Part 1", "Do Lecture 4 HW", 2, LocalDate.of(2024, 10, 29), "Uni Stuff");
+        taskManager.addTask("Operating Systems - Part 2", "Stop crying, finish dir traversal program", 2, LocalDate.of(2024, 10, 27), "Uni Stuff");
+        taskManager.addTask("Operating Systems - Part 1", "Cry a river", 1, LocalDate.of(2024, 10, 26), "Uni Stuff");
+        taskManager.addTask("Combinatorics - Part 2", "Forget what a permutation is", 3, LocalDate.of(2024, 10, 28), "Uni Stuff");
 
 
         // get array of all tasks from TaskManager
@@ -97,7 +96,7 @@ public class Main {
                             System.out.println("⚠️ Invalid priority. Please provide a valid integer.");
                         }
                     } else {
-                        System.out.println("❌ Invalid arguments. Usage: filterTaskByPriority <priority>");
+                        System.out.println("❌ Invalid arguments. Usage: filterByPriority <priority>");
                     }
                     break;
                 }
